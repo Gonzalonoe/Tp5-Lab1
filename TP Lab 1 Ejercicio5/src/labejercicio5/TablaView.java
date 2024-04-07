@@ -19,8 +19,7 @@ public class TablaView extends javax.swing.JFrame {
 
 private DefaultTableModel modelo = new DefaultTableModel();
 
-String categoria,nombre;
-double precio;
+String categoria;
 
 public TablaView() {
         initComponents();
@@ -217,7 +216,7 @@ public TablaView() {
         deshabilitarIngresodeDatos(true);
 
         categoria = (String) jcbCategoria.getSelectedItem();
-        
+        jbAgregarProducto.setEnabled(false);
         //jpNombrePrecio.setEnabled(true);
     }//GEN-LAST:event_jbAgregarProductoActionPerformed
 
@@ -238,11 +237,12 @@ public TablaView() {
     private void jtfPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfPrecioFocusLost
    
         if (!jtfNombre.getText().isEmpty() || jtfPrecio.getText().isEmpty()) {
-            precio = Double.parseDouble(jtfPrecio.getText());  
-            nombre = jtfNombre.getText();
+            double precio = Double.parseDouble(jtfPrecio.getText());  
+            String nombre = jtfNombre.getText();
             modelo.addRow(new Object[]{categoria,nombre,precio});
             jtfNombre.setText("");
             jtfPrecio.setText("");
+            jbAgregarProducto.setEnabled(true);
            deshabilitarIngresodeDatos(false);
         }
     
