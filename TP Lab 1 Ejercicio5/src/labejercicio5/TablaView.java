@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -236,7 +237,9 @@ public TablaView() {
 
     private void jtfPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfPrecioFocusLost
    
-        if (!jtfNombre.getText().isEmpty() || jtfPrecio.getText().isEmpty()) {
+        if (jtfNombre.getText().isEmpty() || jtfPrecio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No deben haber campos vacios");
+}else{
             double precio = Double.parseDouble(jtfPrecio.getText());  
             String nombre = jtfNombre.getText();
             modelo.addRow(new Object[]{categoria,nombre,precio});
