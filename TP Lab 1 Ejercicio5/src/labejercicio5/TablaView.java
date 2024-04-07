@@ -5,6 +5,7 @@
 package labejercicio5;
 
 import java.awt.Image;
+import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,7 +18,11 @@ import javax.swing.table.DefaultTableModel;
 public class TablaView extends javax.swing.JFrame {
 
 private DefaultTableModel modelo = new DefaultTableModel();
-    public TablaView() {
+
+String categoria,nombre;
+double precio;
+
+public TablaView() {
         initComponents();
         armarCabecera();
         cargarCombo();
@@ -76,6 +81,11 @@ private DefaultTableModel modelo = new DefaultTableModel();
         jLabel1.setEnabled(false);
 
         jtfNombre.setEnabled(false);
+        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNombreActionPerformed(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(153, 0, 153));
         jLabel2.setFont(new java.awt.Font("Montserrat Black", 0, 14)); // NOI18N
@@ -84,6 +94,11 @@ private DefaultTableModel modelo = new DefaultTableModel();
         jLabel2.setEnabled(false);
 
         jtfPrecio.setEnabled(false);
+        jtfPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfPrecioFocusLost(evt);
+            }
+        });
         jtfPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfPrecioActionPerformed(evt);
@@ -119,14 +134,12 @@ private DefaultTableModel modelo = new DefaultTableModel();
                         .addGap(6, 6, 6))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtfPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(jtfNombre))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(23, 23, 23))))
@@ -158,8 +171,6 @@ private DefaultTableModel modelo = new DefaultTableModel();
 
         jpBG.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 450, 230));
 
-        jtProductos.setBackground(new java.awt.Color(255, 255, 255));
-        jtProductos.setForeground(new java.awt.Color(255, 255, 255));
         jtProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -203,21 +214,39 @@ private DefaultTableModel modelo = new DefaultTableModel();
 
     private void jbAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarProductoActionPerformed
 
-        jtfNombre.setEnabled(true);
-        jtfPrecio.setEnabled(true);
-        jLabel2.setEnabled(true);
-        jLabel1.setEnabled(true);
+        deshabilitarIngresodeDatos(true);
 
+        categoria = (String) jcbCategoria.getSelectedItem();
+        
         //jpNombrePrecio.setEnabled(true);
     }//GEN-LAST:event_jbAgregarProductoActionPerformed
 
     private void jtfPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPrecioActionPerformed
-        // TODO add your handling code here:
+    
+    
     }//GEN-LAST:event_jtfPrecioActionPerformed
 
     private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoriaActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_jcbCategoriaActionPerformed
+
+    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
+    
+               
+    }//GEN-LAST:event_jtfNombreActionPerformed
+
+    private void jtfPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfPrecioFocusLost
+   
+        if (!jtfNombre.getText().isEmpty() || jtfPrecio.getText().isEmpty()) {
+            precio = Double.parseDouble(jtfPrecio.getText());  
+            nombre = jtfNombre.getText();
+            modelo.addRow(new Object[]{categoria,nombre,precio});
+            jtfNombre.setText("");
+            jtfPrecio.setText("");
+           deshabilitarIngresodeDatos(false);
+        }
+    
+    }//GEN-LAST:event_jtfPrecioFocusLost
 
     /**
      * @param args the command line arguments
@@ -295,6 +324,16 @@ public Icon setIcono(String url,JButton boton){
     ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT));
     
     return icono;
-    
 }
+
+    private void deshabilitarIngresodeDatos(boolean a){
+        
+        jtfNombre.setEnabled(a);
+        jtfPrecio.setEnabled(a);
+        jLabel2.setEnabled(a);
+        jLabel1.setEnabled(a);
+}
+        
+    
+
 }
