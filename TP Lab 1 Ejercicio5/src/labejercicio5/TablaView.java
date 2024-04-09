@@ -68,11 +68,6 @@ public TablaView() {
         jLabel3.setText("Categoria:");
 
         jcbCategoria.setEditable(true);
-        jcbCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbCategoriaActionPerformed(evt);
-            }
-        });
 
         jLabel1.setBackground(new java.awt.Color(153, 0, 153));
         jLabel1.setFont(new java.awt.Font("Montserrat Black", 0, 14)); // NOI18N
@@ -81,11 +76,6 @@ public TablaView() {
         jLabel1.setEnabled(false);
 
         jtfNombre.setEnabled(false);
-        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNombreActionPerformed(evt);
-            }
-        });
 
         jLabel2.setBackground(new java.awt.Color(153, 0, 153));
         jLabel2.setFont(new java.awt.Font("Montserrat Black", 0, 14)); // NOI18N
@@ -97,11 +87,6 @@ public TablaView() {
         jtfPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtfPrecioFocusLost(evt);
-            }
-        });
-        jtfPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfPrecioActionPerformed(evt);
             }
         });
 
@@ -220,20 +205,6 @@ public TablaView() {
         jbAgregarProducto.setEnabled(false);
         //jpNombrePrecio.setEnabled(true);
     }//GEN-LAST:event_jbAgregarProductoActionPerformed
-
-    private void jtfPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPrecioActionPerformed
-    
-    
-    }//GEN-LAST:event_jtfPrecioActionPerformed
-
-    private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoriaActionPerformed
-    
-    }//GEN-LAST:event_jcbCategoriaActionPerformed
-
-    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
-    
-               
-    }//GEN-LAST:event_jtfNombreActionPerformed
 
     private void jtfPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfPrecioFocusLost
    
